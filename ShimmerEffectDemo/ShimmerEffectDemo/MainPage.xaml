@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShimmerEffectDemo.MainPage"
+             xmlns:vm="clr-namespace:ShimmerEffectDemo.ViewModels"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:sk="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <StackLayout>
+
+        <StackLayout Padding="10">
+            <Frame Margin="30,20,30,10" BackgroundColor="Transparent" HasShadow="False" CornerRadius="5" Padding="0" sk:Skeleton.IsBusy="{Binding IsBusy}" sk:Skeleton.BackgroundColor="{StaticResource GrayColor}" sk:Skeleton.Animation="{sk:DefaultAnimation Fade}">
+                <Label Text="Shimmer Effect Demo" HorizontalTextAlignment="Center" TextColor="{StaticResource BlackColor}" FontAttributes="Bold" FontSize="24"/>
+            </Frame>
+
+            <CollectionView 
+                      SelectionMode="None"
+                      VerticalOptions="FillAndExpand"
+                      BackgroundColor="Transparent"
+                      ItemsSource="{Binding Items}"
+                      sk:Skeleton.IsParent="True"
+                      sk:Skeleton.IsBusy="{Binding IsBusy}"
+                      sk:Skeleton.Animation="{sk:DefaultAnimation Fade}">
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Margin="30,10" Spacing="20">
+                            <Frame HasShadow="False"
+                                           CornerRadius="20"
+                                           Padding="0"
+                                           WidthRequest="70"
+                                           IsClippedToBounds="True"
+                                           BackgroundColor="{StaticResource WhiteColor}"
+                                           sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                           sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+                                <ffimageloading:CachedImage Source="{Binding Image}"
+                                                        Aspect="AspectFill"/>
+
+                            </Frame>
+
+                            <StackLayout  Margin="0,5">
+
+                                <Frame BackgroundColor="Transparent"
+                                       HasShadow="False"
+                                       CornerRadius="5"
+                                       Padding="0"
+                                       sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                       sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+
+                                    <Label Text="{Binding Title}"
+                                       TextColor="{StaticResource BlackColor}"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Start"/>
+                                </Frame>
+
+                                <Frame BackgroundColor="Transparent"
+                                       HasShadow="False"
+                                       CornerRadius="5"
+                                       Padding="0"
+                                       sk:Skeleton.IsBusy="{Binding IsBusy}"
+                                       sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+
+                                    <Label
+                                    Text="{Binding Subtitle}"
+                                    TextColor="{StaticResource DarkGrayColor}"
+                                    FontSize="14"
+                                    HorizontalOptions="Start"/>
+                                </Frame>
+
+                            </StackLayout>
+
+
+                            <StackLayout WidthRequest="26" HeightRequest="26" Margin="0,5" HorizontalOptions="EndAndExpand">
+                                <Frame HasShadow="False"
+                           CornerRadius="5"
+                           Padding="0"
+                           IsClippedToBounds="True"
+                           BackgroundColor="Transparent"
+                           HorizontalOptions="End" 
+                           sk:Skeleton.IsParent="True"
+                           sk:Skeleton.IsBusy="{Binding IsBusy}"
+                           sk:Skeleton.BackgroundColor="{StaticResource GrayColor}">
+
+                                </Frame>
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
